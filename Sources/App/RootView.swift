@@ -46,6 +46,7 @@ struct RootView: View {
             tabBar
         }
         .background(.ultraThinMaterial)
+        .task { await updates.check() }
     }
 
     private func presentSignIn() {
@@ -64,11 +65,10 @@ struct RootView: View {
                 Button {
                     openURL(url)
                 } label: {
-                    Image(systemName: "arrow.down.circle.fill")
-                        .symbolRenderingMode(.hierarchical)
-                        .foregroundStyle(.tint)
+                    Label("Update", systemImage: "arrow.down.circle.fill")
                 }
-                .buttonStyle(.borderless)
+                .buttonStyle(.bordered)
+                .controlSize(.small)
                 .help("Update available: \(version)")
             }
             Spacer()
